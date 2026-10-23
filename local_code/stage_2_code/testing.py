@@ -16,7 +16,7 @@ loader.dataset_source_folder_path = (
 )
 
 # Replace with your actual labeled test filename
-loader.dataset_source_file_name = "ReadMe (1).docx"
+loader.dataset_source_file_name = "test.csv"
 
 test_data = loader.load()
 

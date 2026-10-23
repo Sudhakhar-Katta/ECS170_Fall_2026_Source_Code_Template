@@ -28,10 +28,10 @@ class Method_MLP(method, nn.Module):
 
         self.device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # check here for nn.Linear doc: https://pytorch.org/docs/stable/generated/torch.nn.Linear.html
-        self.fc_layer_1 = nn.Linear(784, 128)
+        self.fc_layer_1 = nn.Linear(784, 256)
         # check here for nn.ReLU doc: https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html
         self.activation_func_1 = nn.ReLU()
-        self.fc_layer_2 = nn.Linear(128,10)
+        self.fc_layer_2 = nn.Linear(256,10)
 
         self.to(self.device)
         # check here for nn.Softmax doc: https://pytorch.org/docs/stable/generated/torch.nn.Softmax.html

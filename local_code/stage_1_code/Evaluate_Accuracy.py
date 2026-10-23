@@ -38,10 +38,12 @@ class Evaluate_Accuracy(evaluate):
             zero_division=0
         )
 
-        print(f"Accuracy:  {accuracy:.4f}")
-        print(f"Precision: {precision:.4f}")
-        print(f"Recall:    {recall:.4f}")
-        print(f"F1 Score:  {f1:.4f}")
+        self.metrics = {
+            "accuracy": float(accuracy),
+            "precision": float(precision),
+            "recall": float(recall),
+            "f1": float(f1)
+        }
 
         return accuracy
         

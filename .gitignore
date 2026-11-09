@@ -2,3 +2,5 @@ data/stage_2_data/*.docx
 data/stage_2_data/*.csv
 __pycache__/
 *.pycdata/stage_3_data/
+data/stage_3_data/*.docx
+data/stage_3_data/*.csv

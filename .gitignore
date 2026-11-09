@@ -13,4 +13,9 @@ __pycache__/
 *.pyc
 
 venv/
+.venv/venv/
 .venv/
+data/stage_3_data/
+*.pth
+__pycache__/
+*.pyc

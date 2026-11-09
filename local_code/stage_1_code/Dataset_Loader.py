@@ -1,10 +1,6 @@
-'''
-Concrete IO class for a specific dataset
-'''
 
-# Copyright (c) 2017-Current Jiawei Zhang <jiawei@ifmlab.org>
-# License: TBD
-
+import numpy as np
+import pickle
 from local_code.base_class.dataset import dataset
 
 
@@ -12,19 +8,46 @@ class Dataset_Loader(dataset):
     data = None
     dataset_source_folder_path = None
     dataset_source_file_name = None
-    
+
     def __init__(self, dName=None, dDescription=None):
         super().__init__(dName, dDescription)
-    
+        self.dataset_name = dName
+
     def load(self):
         print('loading data...')
-        X = []
-        y = []
-        f = open(self.dataset_source_folder_path + self.dataset_source_file_name, 'r')
-        for line in f:
-            line = line.strip('\n')
-            elements = [int(i) for i in line.split(',')] # for each line it split everything if it has comas like 1,2,3,4,5 1 2 3 4 5
-            X.append(elements[1:])
-            y.append(elements[0])
-        f.close()
-        return {'X': X, 'y': y}
+
+        with open(self.dataset_source_folder_path +
+                  self.dataset_source_file_name, 'rb') as f:
+            data = pickle.load(f)
+
+        result = {}
+
+        for split in ['train', 'test']:
+            X = []
+            y = []
+
+            for instance in data[split]:
+                X.append(instance['image'])
+                y.append(instance['label'])
+
+            X = np.array(X, dtype=np.float32)
+            y = np.array(y, dtype=np.int64)
+
+            if self.dataset_name == "MNIST":
+                X = X[:, np.newaxis, :, :]
+
+            elif self.dataset_name == "ORL":
+                X = X[:, :, :, 0]
+                X = X[:, np.newaxis, :, :]
+                y = y - 1
+
+            elif self.dataset_name == "CIFAR":
+                X = X.transpose(0, 3, 1, 2)
+
+            X = X / 255.0
+
+            result[split] = {'X': X, 'y': y}
+
+            print(split, X.shape, y.shape)
+
+        return result

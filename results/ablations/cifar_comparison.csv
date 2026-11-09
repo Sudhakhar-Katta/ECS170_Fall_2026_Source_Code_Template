@@ -1,0 +1,3 @@
+dataset,experiment,setting,seed,epochs,accuracy,macro_precision,macro_recall,macro_f1,final_train_loss,final_train_accuracy
+CIFAR,baseline,dropout 0.4,42,40,0.8615,0.8614288738965487,0.8615,0.86137179759412,0.06362382683753967,0.97922
+CIFAR,variant,dropout 0.2,42,40,0.8656,0.8653513719075683,0.8656,0.8654299627887546,0.026404878559112548,0.99276
